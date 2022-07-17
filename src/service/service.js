@@ -3,7 +3,8 @@ import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
 
 // 初始化web.storage客户端
-const client = new Web3Storage({ token: process.env.REACT_APP_WEB3STORAGE_API_TOKEN });
+const REACT_APP_WEB3STORAGE_API_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDcwREVmQWNDQThFMjQzNzc5NzFGMzYzNmRkRDk4MTBjRTg2RTE0MmQiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NTc3MDM4NjQ3MDgsIm5hbWUiOiJkZW1vIn0.gr5ITCiXYSxZYz1LKOe6yDlqdODTJPyEY64afvaTFsM"
+const client = new Web3Storage({ token: REACT_APP_WEB3STORAGE_API_TOKEN });
 
 // 下载
 // uploadFiles(files, setSendProgress);
@@ -19,7 +20,7 @@ const client = new Web3Storage({ token: process.env.REACT_APP_WEB3STORAGE_API_TO
 
 
 // 获取已上传列表
-const listUploads = async function() {
+export const listUploads = async function() {
     let uploads = new Array()
     for await (const upload of client.list()) {
         console.log(`upload ${upload.name} - cid: ${upload.cid} - size: ${upload.dagSize}`)
@@ -33,7 +34,7 @@ const listUploads = async function() {
 }
 
 // 文件上传
-const uploadFiles = async function(files, setProgress) {
+export const uploadFiles = async function(files, setProgress) {
     let size = 0;
     for (let i = 0; i<files.length; i++) {
         size += files[i].size;
@@ -59,7 +60,7 @@ const uploadFiles = async function(files, setProgress) {
 }
 
 // 文件下载
-const downloadFiles = async function(cid, filePath, setProgress) {
+export const downloadFiles = async function(cid, filePath, setProgress) {
     const links = await getLinks(cid)
 
     let progressMap = new Map()
@@ -112,7 +113,7 @@ const downloadFiles = async function(cid, filePath, setProgress) {
     })
 }
 
-const getLinks = async function(cid) {
+export const getLinks = async function(cid) {
     const url = 'https://dweb.link/api/v0/ls?arg=' + cid ;
 
     let res = await fetch(url);
