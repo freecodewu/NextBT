@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Input } from "antd";
 import { downloadFiles } from "@service";
+import { useState } from "react";
 const { TextArea } = Input;
 const Content = styled.div`
   color: #ffffff;
@@ -57,20 +58,24 @@ const Content = styled.div`
 `;
 
 export default function AddModal({ hide }) {
+  const [cid, setCid] = useState(undefined);
   function download() {
     console.log("start");
-    downloadFiles(
-      "bafybeihndmhip43rzlhilukyugeskd3nkmwktlbw552kafzjhkpozmoe3i",
-      null,
-      console.log
-    );
+    downloadFiles(cid, null, console.log);
   }
 
   return (
     <Content>
       <div className="title">Add CID</div>
       <div className="input">
-        <TextArea rows={6} placeholder="Please input the CID" />
+        <TextArea
+          value={cid}
+          onChange={(e) => {
+            setCid(e.target.value);
+          }}
+          rows={6}
+          placeholder="Please input the CID"
+        />
         <div className="btn-group">
           <div
             className="btn cancel"
