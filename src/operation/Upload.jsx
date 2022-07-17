@@ -1,7 +1,8 @@
 import List from "./List";
 import Pannel from "./Pannel";
 import styled from "styled-components";
-import { Dropdown, Menu, Upload as UploadAntd } from "antd";
+import { Dropdown, Menu } from "antd";
+import UploadBtn from "./UploadBtn";
 const columns = [
   {
     title: "Name",
@@ -98,29 +99,12 @@ function Ops() {
   );
 }
 
-const Btn = styled(UploadAntd)`
-  background: ${(props) => props.theme.$frountColor};
-  width: 164px;
-  height: 64px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: auto;
-  .ant-upload {
-    color: #ffffff;
-    font-size: 24px;
-    line-height: 24px;
-    font-weight: 500;
-  }
-`;
-
 export default function Upload() {
   return (
     <Pannel>
       <div className="pannel-title">
         <span>Files</span>
-        <Btn>＋Upload</Btn>
+        <UploadBtn />
       </div>
       <List
         columns={columns}

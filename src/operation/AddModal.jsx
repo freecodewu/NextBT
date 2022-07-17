@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Input } from "antd";
-
+import { downloadFiles } from "@service";
 const { TextArea } = Input;
 const Content = styled.div`
   color: #ffffff;
@@ -57,6 +57,15 @@ const Content = styled.div`
 `;
 
 export default function AddModal({ hide }) {
+  function download() {
+    console.log("start");
+    downloadFiles(
+      "bafybeihndmhip43rzlhilukyugeskd3nkmwktlbw552kafzjhkpozmoe3i",
+      null,
+      console.log
+    );
+  }
+
   return (
     <Content>
       <div className="title">Add CID</div>
@@ -71,7 +80,14 @@ export default function AddModal({ hide }) {
           >
             Cancel
           </div>
-          <div className="btn download">Download</div>
+          <div
+            className="btn download"
+            onClick={() => {
+              download();
+            }}
+          >
+            Download
+          </div>
         </div>
       </div>
     </Content>

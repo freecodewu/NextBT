@@ -44,7 +44,7 @@ const Coms = [
   <Dvpn key="dvpn" />,
 ];
 export default function Operation() {
-  const [tabIndex, setIndex] = useState(0);
+  const [tabIndex, setIndex] = useState(1);
   return (
     <div>
       <Header />

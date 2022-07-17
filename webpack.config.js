@@ -46,6 +46,7 @@ module.exports = {
     alias: {
       "@": [path.resolve(__dirname, "src")],
       "@imgs": [path.resolve(__dirname, "public/imgs")],
+      "@service": [path.resolve(__dirname, "src/service/service.js")],
     },
     fallback: { path: false },
   },
