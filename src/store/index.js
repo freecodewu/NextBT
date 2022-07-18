@@ -6,30 +6,8 @@ import filesize from "filesize";
 const listSlice = createSlice({
   name: "upload",
   initialState: {
-    download: [
-      {
-        name: "Mr.Turner.2014.iNTERNAL.720p.BluRay (共3个文件))",
-        size: "735.7MB",
-        status: "2022/07/15 05:45 已完成",
-      },
-      {
-        name: "Mr.Turner.2014.iNTERNAL.720p.BluRay (共222个文件))",
-        size: "735.7MB",
-        status: "2022/07/15 05:45 已完成",
-      },
-    ],
-    upload: [
-      {
-        name: "Mr.Turner.2014.iNTERNAL.720p.BluRay (共3个文件))",
-        size: "735.7MB",
-        status: "2022/07/15 05:45 已完成",
-      },
-      {
-        name: "Mr.Turner.2014.iNTERNAL.720p.BluRay (共222个文件))",
-        size: "735.7MB",
-        status: "2022/07/15 05:45 已完成",
-      },
-    ],
+    download: [],
+    upload: [],
   },
   reducers: {
     mutateStatus: (state, action) => {
@@ -65,19 +43,14 @@ export const useGetList = (type) => {
 
 export const useUpdateList = (type) => {
   const dispatch = useDispatch();
-  return ({ name, size }) => {
-    return ({
-      cid,
-      progress,
-      nameFromService = name,
-      sizeFromService = size,
-    }) => {
+  return ({ nameFromInput, sizeFromInput }) => {
+    return ({ cid, progress, name = nameFromInput, size = sizeFromInput }) => {
       dispatch(
         mutateStatus({
           type,
           item: {
-            name: nameFromService,
-            size: filesize(sizeFromService),
+            name,
+            size: filesize(size),
             cid: cid ?? "",
             progress,
           },

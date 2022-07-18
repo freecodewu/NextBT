@@ -25,7 +25,10 @@ export default function UploadBtn() {
   function onChange(event) {
     console.log(event.target.files[0]);
     const curFile = event.target.files[0];
-    const setProgress = update({ name: curFile.name, size: curFile.size });
+    const setProgress = update({
+      nameFromInput: curFile.name,
+      sizeFromInput: curFile.size,
+    });
     setProgress({
       progress: 0,
     });

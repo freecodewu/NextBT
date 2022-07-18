@@ -75,8 +75,8 @@ export const downloadFiles = async function (cid, filePath, setProgress) {
   setProgress({
     progress: 0,
     cid,
-    nameFromService: links[0].Name,
-    sizeFromService: 0,
+    name: links[0].Name,
+    size: 0,
   });
   let progressMap = new Map();
 
@@ -103,8 +103,8 @@ export const downloadFiles = async function (cid, filePath, setProgress) {
         setProgress({
           progress,
           cid,
-          nameFromService: name,
-          sizeFromService: total,
+          name,
+          size: total,
         });
       });
       request.onload = (res) => {
