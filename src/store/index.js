@@ -66,13 +66,19 @@ export const useGetList = (type) => {
 export const useUpdateList = (type) => {
   const dispatch = useDispatch();
   return ({ name, size }) => {
-    return (progress) => {
+    return ({
+      cid,
+      progress,
+      nameFromService = name,
+      sizeFromService = size,
+    }) => {
       dispatch(
         mutateStatus({
           type,
           item: {
-            name,
-            size: filesize(size),
+            name: nameFromService,
+            size: filesize(sizeFromService),
+            cid: cid ?? "",
             progress,
           },
         })

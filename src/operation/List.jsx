@@ -15,6 +15,8 @@ const Wrapper = styled.div`
       text-overflow: ellipsis;
       white-space: nowrap;
       padding: 0 10px;
+      display: inline-flex;
+      align-items: center;
     }
   }
   .title {

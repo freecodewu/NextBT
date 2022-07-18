@@ -50,12 +50,16 @@ export const uploadFiles = async function (files, setProgress) {
     console.log(`stored chunk of ${chunkSize} bytes, %${progress}`);
     setProgress({
       progress,
-      rootCid,
+      cid: rootCid,
     });
   };
 
   try {
     rootCid = await client.put(files, { onStoredChunk });
+    setProgress({
+      progress: 100,
+      cid: rootCid,
+    });
     console.log("Successfully sent to IPFS");
     console.log("https://" + rootCid + ".ipfs.dweb.link");
   } catch (err) {
@@ -68,10 +72,15 @@ export const uploadFiles = async function (files, setProgress) {
 // 文件下载
 export const downloadFiles = async function (cid, filePath, setProgress) {
   const links = await getLinks(cid);
-
+  setProgress({
+    progress: 0,
+    cid,
+    nameFromService: links[0].Name,
+    sizeFromService: 0,
+  });
   let progressMap = new Map();
 
-  const getFileBlob = function (url) {
+  const getFileBlob = function (url, name) {
     return new Promise((resolve, reject) => {
       let request = new XMLHttpRequest();
       request.open("GET", url, true);
@@ -91,7 +100,12 @@ export const downloadFiles = async function (cid, filePath, setProgress) {
 
         let progress =
           (loaded * 100) / total > 100 ? 100 : (loaded * 100) / total;
-        setProgress(progress);
+        setProgress({
+          progress,
+          cid,
+          nameFromService: name,
+          sizeFromService: total,
+        });
       });
       request.onload = (res) => {
         if (res.target.status == 200) {
@@ -108,7 +122,7 @@ export const downloadFiles = async function (cid, filePath, setProgress) {
   const promises = [];
   links.forEach((link) => {
     let url = `https://${cid}.ipfs.dweb.link/${link.Name}`;
-    const promise = getFileBlob(url).then((res) => {
+    const promise = getFileBlob(url, link.Name).then((res) => {
       zip.file(link.Name, res, { binary: true });
     });
     promises.push(promise);
@@ -118,6 +132,7 @@ export const downloadFiles = async function (cid, filePath, setProgress) {
       saveAs(res, cid + ".zip");
     });
   });
+  return 0;
 };
 
 export const getLinks = async function (cid) {

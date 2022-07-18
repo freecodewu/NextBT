@@ -46,7 +46,6 @@ export default function Download() {
   const [visible, setVisible] = useState(false);
   const list = useGetList("download");
   const update = useUpdateList("download");
-  console.log(list);
   const menu = useMemo(() => (
     <Menu
       items={[
@@ -97,6 +96,7 @@ export default function Download() {
         closable={false}
       >
         <AddModal
+          update={update}
           hide={() => {
             setVisible(false);
           }}
