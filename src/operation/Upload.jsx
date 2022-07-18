@@ -38,7 +38,7 @@ const columns = [
     width: "20%",
   },
   {
-    title: "Download Status",
+    title: "Upload Status",
     dataIndex: "status",
     width: "20%",
   },
