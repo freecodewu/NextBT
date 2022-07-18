@@ -4,14 +4,32 @@ import styled from "styled-components";
 import { Dropdown, Menu } from "antd";
 import UploadBtn from "./UploadBtn";
 import { useGetList } from "@/store";
+
+const Name = styled.div`
+  display: inline-flex;
+  flex-direction: column;
+  color: #fff;
+  .cid {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 12px;
+    font-weight: 500;
+    margin-top: 8px;
+  }
+`;
 const columns = [
   {
     title: "Name",
     dataIndex: "name",
     width: "50%",
-    render: (record) => {
-      console.log(record);
-      return 222;
+    render: (name, record) => {
+      console.log(record.name);
+      return (
+        <Name>
+          <div> {record.name}</div>
+          {record.cid && <div className="cid">{record.cid}</div>}
+        </Name>
+      );
     },
   },
   {
