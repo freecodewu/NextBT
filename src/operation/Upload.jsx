@@ -3,11 +3,16 @@ import Pannel from "./Pannel";
 import styled from "styled-components";
 import { Dropdown, Menu } from "antd";
 import UploadBtn from "./UploadBtn";
+import { useGetList } from "@/store";
 const columns = [
   {
     title: "Name",
     dataIndex: "name",
     width: "50%",
+    render: (record) => {
+      console.log(record);
+      return 222;
+    },
   },
   {
     title: "Size",
@@ -23,18 +28,6 @@ const columns = [
     title: "",
     dataIndex: "ops",
     width: "10%",
-  },
-];
-const dataSource = [
-  {
-    name: "Mr.Turner.2014.iNTERNAL.720p.BluRay (共3个文件))",
-    size: "735.7MB",
-    status: "2022/07/15 05:45 已完成",
-  },
-  {
-    name: "Mr.Turner.2014.iNTERNAL.720p.BluRay (共222个文件))",
-    size: "735.7MB",
-    status: "2022/07/15 05:45 已完成",
   },
 ];
 
@@ -100,6 +93,8 @@ function Ops() {
 }
 
 export default function Upload() {
+  const list = useGetList("upload");
+
   return (
     <Pannel>
       <div className="pannel-title">
@@ -108,7 +103,7 @@ export default function Upload() {
       </div>
       <List
         columns={columns}
-        dataSource={dataSource.map((item) => {
+        dataSource={list.map((item) => {
           return { ...item, ops: <Ops /> };
         })}
       />

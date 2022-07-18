@@ -55,7 +55,7 @@ export default function List({ columns, dataSource }) {
         return (
           <div className="item" key={data.name}>
             <Checkbox></Checkbox>
-            {columns.map((column) => {
+            {columns.map((column, columnIndex) => {
               return (
                 <div
                   key={column.dataIndex}
@@ -77,7 +77,13 @@ export default function List({ columns, dataSource }) {
                       src={require(`@imgs/operation/bt.png`)}
                     ></img>
                   )}
-                  {data[column["dataIndex"]]}
+                  {column.render
+                    ? column.render(
+                        data[column["dataIndex"]],
+                        data,
+                        columnIndex
+                      )
+                    : data[column["dataIndex"]]}
                 </div>
               );
             })}

@@ -3,6 +3,7 @@ import Pannel from "./Pannel";
 import { Dropdown, Menu, Modal } from "antd";
 import { useMemo, useState } from "react";
 import AddModal from "./AddModal";
+import { useGetList, useUpdateList } from "@/store";
 const columns = [
   {
     title: "Name",
@@ -20,18 +21,7 @@ const columns = [
     width: "30%",
   },
 ];
-const dataSource = [
-  {
-    name: "Mr.Turner.2014.iNTERNAL.720p.BluRay (共3个文件))",
-    size: "735.7MB",
-    status: "2022/07/15 05:45 已完成",
-  },
-  {
-    name: "Mr.Turner.2014.iNTERNAL.720p.BluRay (共222个文件))",
-    size: "735.7MB",
-    status: "2022/07/15 05:45 已完成",
-  },
-];
+
 function Label({ text, onClick }) {
   return (
     <div
@@ -54,6 +44,9 @@ function Label({ text, onClick }) {
 
 export default function Download() {
   const [visible, setVisible] = useState(false);
+  const list = useGetList("download");
+  const update = useUpdateList("download");
+  console.log(list);
   const menu = useMemo(() => (
     <Menu
       items={[
@@ -73,7 +66,13 @@ export default function Download() {
   return (
     <Pannel>
       <div className="pannel-title">
-        <span>Files</span>
+        <span
+          onClick={() => {
+            update();
+          }}
+        >
+          Files
+        </span>
         <Dropdown overlay={menu} placement="bottom">
           <img
             style={{
@@ -87,7 +86,7 @@ export default function Download() {
           />
         </Dropdown>
       </div>
-      <List columns={columns} dataSource={dataSource} />
+      <List columns={columns} dataSource={list} />
       <Modal
         bodyStyle={{
           backgroundColor: "#14142B",

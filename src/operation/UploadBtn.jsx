@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { uploadFiles } from "@service";
-
+import { useUpdateList } from "@/store";
 const Btn = styled.div`
   background: ${(props) => props.theme.$frountColor};
   height: 64px;
@@ -20,9 +20,14 @@ const Btn = styled.div`
 `;
 
 export default function UploadBtn() {
+  const update = useUpdateList("upload");
+  console.log(update);
   function onChange(event) {
-    uploadFiles(event.target.files, console.log);
-    console.log(event.target.files);
+    console.log(event.target.files[0]);
+    const curFile = event.target.files[0];
+    const setProgress = update({ name: curFile.name, size: curFile.size });
+    setProgress(0);
+    uploadFiles(event.target.files, setProgress);
   }
   return (
     <Btn>

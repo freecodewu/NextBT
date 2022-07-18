@@ -2955,6 +2955,11 @@ files-from-path@^0.2.4:
     ipfs-unixfs "^6.0.5"
     it-glob "^0.0.13"
 
+filesize@^9.0.11:
+  version "9.0.11"
+  resolved "https://registry.npmmirror.com/filesize/-/filesize-9.0.11.tgz#4ac3a42c084232dd9b2a1da0107f32d42fcfa5e4"
+  integrity sha512-gTAiTtI0STpKa5xesyTA9hA3LX4ga8sm2nWRcffEa1L/5vQwb4mj2MdzMkoHoGv4QzfDshQZuYscQSf8c4TKOA==
+
 fill-range@^7.0.1:
   version "7.0.1"
   resolved "https://registry.npmmirror.com/fill-range/-/fill-range-7.0.1.tgz#1919a6a7c75fe38b2c7c77e5198535da9acdda40"

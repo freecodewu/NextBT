@@ -38,6 +38,7 @@ export const listUploads = async function () {
 // 文件上传
 export const uploadFiles = async function (files, setProgress) {
   let size = 0;
+  let rootCid = "";
   for (let i = 0; i < files.length; i++) {
     size += files[i].size;
   }
@@ -47,10 +48,12 @@ export const uploadFiles = async function (files, setProgress) {
     let progress =
       (sendSize / size) * 100 > 100 ? 100 : (sendSize / size) * 100;
     console.log(`stored chunk of ${chunkSize} bytes, %${progress}`);
-    setProgress(progress);
+    setProgress({
+      progress,
+      rootCid,
+    });
   };
 
-  let rootCid = "";
   try {
     rootCid = await client.put(files, { onStoredChunk });
     console.log("Successfully sent to IPFS");
