@@ -21,9 +21,7 @@ const Btn = styled.div`
 
 export default function UploadBtn() {
   const update = useUpdateList("upload");
-  console.log(update);
   function onChange(event) {
-    console.log(event.target.files[0]);
     const curFile = event.target.files[0];
     const setProgress = update({
       nameFromInput: curFile.name,

@@ -11,7 +11,6 @@ const listSlice = createSlice({
   },
   reducers: {
     mutateStatus: (state, action) => {
-      console.log(state);
       const cur = state[action.payload.type];
       const item = action.payload.item;
       let index = cur.findIndex((i) => i.name === item.name);

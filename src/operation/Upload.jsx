@@ -23,7 +23,6 @@ const columns = [
     dataIndex: "name",
     width: "50%",
     render: (name, record) => {
-      console.log(record.name);
       return (
         <Name>
           <div> {record.name}</div>

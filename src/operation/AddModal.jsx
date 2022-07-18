@@ -60,7 +60,6 @@ const Content = styled.div`
 export default function AddModal({ hide, update }) {
   const [cid, setCid] = useState(undefined);
   function download() {
-    console.log("start");
     const setProgress = update({});
     downloadFiles(cid, null, setProgress).then(() => {
       hide();
