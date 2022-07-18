@@ -1,0 +1,47 @@
+@import "normalize.css";
+html {
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, Helvetica, Tahoma, Arial,
+    "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei",
+    "WenQuanYi Micro Hei", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+li,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+img,
+video {
+  max-width: 100%;
+}
+.ant-dropdown-menu {
+  background: #252547;
+}
+.ant-dropdown-menu-item:hover {
+  background-color: #252547;
+}
