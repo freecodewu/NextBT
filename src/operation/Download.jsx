@@ -56,7 +56,7 @@ export default function Download() {
         {
           key: "2",
           label: (
-            <Label onClick={() => setVisible(true)} text="Add CID"></Label>
+            <Label onClick={() => setVisible(true)} text="Add FID"></Label>
           ),
         },
       ]}
