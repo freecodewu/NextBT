@@ -68,7 +68,7 @@ export default function AddModal({ hide, update }) {
 
   return (
     <Content>
-      <div className="title">Add CID</div>
+      <div className="title">Add FID</div>
       <div className="input">
         <TextArea
           value={cid}
@@ -76,7 +76,7 @@ export default function AddModal({ hide, update }) {
             setCid(e.target.value);
           }}
           rows={6}
-          placeholder="Please input the CID"
+          placeholder="Please input the FID"
         />
         <div className="btn-group">
           <div

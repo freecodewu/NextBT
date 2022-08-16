@@ -91,7 +91,7 @@ const menu = (
       },
       {
         key: "2",
-        label: <Label type={"copy"} text="Copy CID"></Label>,
+        label: <Label type={"copy"} text="Copy FID"></Label>,
       },
     ]}
   />
