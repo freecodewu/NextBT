@@ -57,8 +57,8 @@ const Content = styled.div`
   }
 `;
 
-export default function AddModal({ hide, update }) {
-  const [cid, setCid] = useState(undefined);
+export default function AddModal({ hide, originCid, update }) {
+  const [cid, setCid] = useState(originCid);
   function download() {
     const setProgress = update({});
     downloadFiles(cid, null, setProgress).then(() => {

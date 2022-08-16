@@ -81,7 +81,7 @@ export const uploadFiles = async function (files, setProgress) {
     let fileId = BigNumber.from(BigNumberFileIdHex).toNumber();
     console.log("fileId: ",fileId);
 
-    console.log("Successfully sent to IPFS");
+    console.log("Successfully sent to IPFS, FID: ", fileId);
     console.log("https://" + rootCid + ".ipfs.dweb.link");
   } catch (err) {
     console.log("Failed to send to IPFS", err);
