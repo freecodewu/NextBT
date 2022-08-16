@@ -88,7 +88,7 @@ const details = [
   [
     {
       type: "Total Spending",
-      size: "O BTT",
+      size: "O NBT",
     },
     {
       type: "Total Download with Speed",
@@ -96,13 +96,13 @@ const details = [
     },
     {
       type: "Spending Ratio",
-      size: "O BTT/GB",
+      size: "O NBT/GB",
     },
   ],
   [
     {
       type: "Total Earning",
-      size: "O BTT",
+      size: "O NBT",
     },
     {
       type: "Total Seeded with Speed",
@@ -110,7 +110,7 @@ const details = [
     },
     {
       type: "Earning Ratio",
-      size: "O BTT/GB",
+      size: "O NBT/GB",
     },
   ],
 ];
