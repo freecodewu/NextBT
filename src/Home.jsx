@@ -2,7 +2,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Section from "./components/Section";
 import styled from "styled-components";
-import global from "@imgs/global.png";
+//import global from "@imgs/global.png";
 import { useNavigate } from "react-router-dom";
 const Main = styled.div`
   padding: 124px 0 82px;
@@ -76,8 +76,11 @@ const Main = styled.div`
       }
     }
   }
+  .threed-material {
+    font-size: 20px;
+  }
 `;
-const reasons = [
+/* const reasons = [
   {
     title: "Security",
     desc: "Protect your privacy through decentralized VNP",
@@ -94,7 +97,7 @@ const reasons = [
     title: "No Evil",
     desc: "Don't abuse your bandwidth",
   },
-];
+]; */
 
 export default function Home() {
   const navigate = useNavigate();
@@ -103,7 +106,7 @@ export default function Home() {
       <Header></Header>
       <Section>
         <Main>
-          <div className="title">NextBT Network</div>
+          {/* <div className="title">NextBT Network</div>
           <div className="desc">
             Building the decentralized VPN to realize secure BT download. Built
             on the IPFS/Filecoin with Web3.0 way
@@ -137,6 +140,42 @@ export default function Home() {
                 </div>
               );
             })}
+          </div> */}
+          <div
+            className="home-get-started"
+            onClick={() => {
+              navigate("/operation");
+            }}
+          >
+            <img
+              src={require("@imgs/homegetstarted.png")}
+              alt=""
+              style={{ width: "100%" }}
+            />
+          </div>
+          <div
+            className="threed-material"
+            onClick={() => {
+              navigate("/operation?fid=123");
+            }}
+          >
+            <img
+              src={require("@imgs/threedmaterial.png")}
+              alt=""
+              style={{ width: "100%" }}
+            />
+          </div>
+          <div
+            className="video-lesson"
+            onClick={() => {
+              navigate("/operation?fid=123");
+            }}
+          >
+            <img
+              src={require("@imgs/videolessson.png")}
+              alt=""
+              style={{ width: "100%" }}
+            />
           </div>
         </Main>
       </Section>

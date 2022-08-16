@@ -4,6 +4,8 @@ import { Dropdown, Menu, Modal } from "antd";
 import { useMemo, useState } from "react";
 import AddModal from "./AddModal";
 import { useGetList, useUpdateList } from "@/store";
+import { useSearchParams } from "react-router-dom";
+
 const columns = [
   {
     title: "Name",
@@ -46,6 +48,13 @@ export default function Download() {
   const [visible, setVisible] = useState(false);
   const list = useGetList("download");
   const update = useUpdateList("download");
+
+  const [search] = useSearchParams();
+  const fid = search.get("fid");
+  if (fid !== "undefined" && fid !== null) {
+    console.log(fid);
+  }
+
   const menu = useMemo(() => (
     <Menu
       items={[
@@ -82,6 +91,7 @@ export default function Download() {
             }}
             src={require(`@imgs/operation/add.png`)}
             alt=""
+            hidden="hidden"
           />
         </Dropdown>
       </div>

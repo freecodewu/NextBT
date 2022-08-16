@@ -1,6 +1,7 @@
 import { ResponsiveHeader as Header } from "@/components/Header";
 import styled from "styled-components";
 import { useState } from "react";
+
 import Download from "./Download";
 import Upload from "./Upload";
 import Wallet from "./Wallet";
@@ -36,7 +37,8 @@ const Main = styled.div`
   }
 `;
 
-const tabs = ["Download", "Upload", "Wallet", "DVPN"];
+//const tabs = ["Download", "Upload", "Wallet", "DVPN"];
+const tabs = ["Download", "Upload"];
 const Coms = [
   <Download key="download" />,
   <Upload key="upload" />,
@@ -45,6 +47,7 @@ const Coms = [
 ];
 export default function Operation() {
   const [tabIndex, setIndex] = useState(0);
+
   return (
     <div>
       <Header />
