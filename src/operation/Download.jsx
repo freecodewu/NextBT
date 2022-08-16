@@ -1,7 +1,7 @@
 import List from "./List";
 import Pannel from "./Pannel";
 import { Dropdown, Menu, Modal } from "antd";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import AddModal from "./AddModal";
 import { useGetList, useUpdateList } from "@/store";
 import { useSearchParams } from "react-router-dom";
@@ -51,9 +51,13 @@ export default function Download() {
 
   const [search] = useSearchParams();
   const fid = search.get("fid");
-  if (fid !== "undefined" && fid !== null) {
-    console.log(fid);
-  }
+
+  useEffect(() => {
+    if (fid !== "undefined" && fid !== null) {
+      console.log(fid);
+      setVisible(true);
+    }
+  }, []);
 
   const menu = useMemo(() => (
     <Menu
@@ -65,7 +69,7 @@ export default function Download() {
         {
           key: "2",
           label: (
-            <Label onClick={() => setVisible(true)} text="Add CID"></Label>
+            <Label onClick={() => setVisible(true)} text="Add FID"></Label>
           ),
         },
       ]}
@@ -91,7 +95,7 @@ export default function Download() {
             }}
             src={require(`@imgs/operation/add.png`)}
             alt=""
-            hidden="hidden"
+            // hidden="hidden"
           />
         </Dropdown>
       </div>
@@ -107,6 +111,7 @@ export default function Download() {
       >
         <AddModal
           update={update}
+          originCid={fid}
           hide={() => {
             setVisible(false);
           }}

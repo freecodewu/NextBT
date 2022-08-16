@@ -156,7 +156,7 @@ export default function Home() {
           <div
             className="threed-material"
             onClick={() => {
-              navigate("/operation?fid=123");
+              navigate("/operation?fid=2");
             }}
           >
             <img
@@ -168,7 +168,7 @@ export default function Home() {
           <div
             className="video-lesson"
             onClick={() => {
-              navigate("/operation?fid=123");
+              navigate("/operation?fid=2");
             }}
           >
             <img

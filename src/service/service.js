@@ -1,6 +1,10 @@
 import { Web3Storage } from "web3.storage/dist/bundle.esm.min.js";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
+import FileTransfer from '../../artifacts/contracts/FileTransfer.sol/FileTransfer.json'
+import { BigNumber, ethers } from "ethers";
+
+const contractAddress = "0xbbFc36C9110e072FB6eC268f37adD5f8d98eF3cF";
 
 // 初始化web.storage客户端
 const REACT_APP_WEB3STORAGE_API_TOKEN =
@@ -54,13 +58,30 @@ export const uploadFiles = async function (files, setProgress) {
     });
   };
 
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  await provider.send('eth_requestAccounts', []); // <- this promps user to connect metamask
+  const signer = provider.getSigner();
+  const contract = new ethers.Contract(contractAddress, FileTransfer.abi, signer);
+
+  const options = {value: ethers.utils.parseEther("0.001")};
+
   try {
     rootCid = await client.put(files, { onStoredChunk });
     setProgress({
       progress: 100,
       cid: rootCid,
     });
-    console.log("Successfully sent to IPFS");
+
+    console.log("begin start uploadFile");
+    let tx = await contract.uploadFile(rootCid, options);
+    let rc = await tx.wait();
+    console.log("after start uploadFile", rc);
+
+    let BigNumberFileIdHex = rc.events[0].args["fileId"]._hex;
+    let fileId = BigNumber.from(BigNumberFileIdHex).toNumber();
+    console.log("fileId: ",fileId);
+
+    console.log("Successfully sent to IPFS, FID: ", fileId);
     console.log("https://" + rootCid + ".ipfs.dweb.link");
   } catch (err) {
     console.log("Failed to send to IPFS", err);
@@ -70,7 +91,26 @@ export const uploadFiles = async function (files, setProgress) {
 };
 
 // 文件下载
-export const downloadFiles = async function (cid, filePath, setProgress) {
+export const downloadFiles = async function (fid, filePath, setProgress) {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  await provider.send('eth_requestAccounts', []); // <- this promps user to connect metamask
+  const signer = provider.getSigner();
+  const contract = new ethers.Contract(contractAddress, FileTransfer.abi, signer);
+
+  const options = {value: ethers.utils.parseEther("0.01")};
+  let cid;
+  try {
+    console.log("开始合约支付");
+    let tx = await contract.downloadFile(fid, options);
+    let rc = await tx.wait();
+    // console.log("after start downloadFile", rc);
+
+    cid = rc.events[0].args["cid"];
+    console.log("支付完成，cid: ",cid);
+  } catch (err) {
+    console.log("Failed to get cid by fid from contract", err);
+  }
+
   const links = await getLinks(cid);
   setProgress({
     progress: 0,
@@ -88,7 +128,7 @@ export const downloadFiles = async function (cid, filePath, setProgress) {
       request.addEventListener("progress", (event) => {
         if (event.lengthComputable) {
           let percentComplete = (event.loaded / event.total) * 100;
-          console.log("文件上传百分比", percentComplete, url);
+          console.log("文件下载百分比", percentComplete, url);
           progressMap.set(url, [event.loaded, event.total]);
         }
         let loaded = 0;
@@ -136,7 +176,7 @@ export const downloadFiles = async function (cid, filePath, setProgress) {
 };
 
 export const getLinks = async function (cid) {
-  const url = "https://dweb.link/api/v0/ls?arg=" + cid;
+  const url = "https://ipfs.io/api/v0/ls?arg=" + cid;
 
   let res = await fetch(url);
   if (!res.ok) {
