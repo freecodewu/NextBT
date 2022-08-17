@@ -63,7 +63,7 @@ export const uploadFiles = async function (files, setProgress) {
   const signer = provider.getSigner();
   const contract = new ethers.Contract(contractAddress, FileTransfer.abi, signer);
 
-  const options = {value: ethers.utils.parseEther("0.001")};
+  const options = {};
 
   try {
     rootCid = await client.put(files, { onStoredChunk });
@@ -91,7 +91,7 @@ export const uploadFiles = async function (files, setProgress) {
 };
 
 // 文件下载
-export const downloadFiles = async function (fid, filePath, setProgress) {
+export const downloadFilesWithPayment = async function (fid, filePath, setProgress) {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   await provider.send('eth_requestAccounts', []); // <- this promps user to connect metamask
   const signer = provider.getSigner();
@@ -111,6 +111,10 @@ export const downloadFiles = async function (fid, filePath, setProgress) {
     console.log("Failed to get cid by fid from contract", err);
   }
 
+  await downloadFiles(cid, "", setProgress);
+}
+
+export const downloadFiles = async function (cid, filePath, setProgress) {
   const links = await getLinks(cid);
   setProgress({
     progress: 0,
