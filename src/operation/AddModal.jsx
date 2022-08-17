@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Input } from "antd";
-import { downloadFiles } from "@service";
+import { downloadFilesWithPayment } from "@service";
 import { useState } from "react";
 const { TextArea } = Input;
 const Content = styled.div`
@@ -61,7 +61,7 @@ export default function AddModal({ hide, originCid, update }) {
   const [cid, setCid] = useState(originCid);
   function download() {
     const setProgress = update({});
-    downloadFiles(cid, null, setProgress).then(() => {
+    downloadFilesWithPayment(cid, null, setProgress).then(() => {
       hide();
     });
   }
