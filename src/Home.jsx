@@ -77,6 +77,11 @@ const Main = styled.div`
     }
   }
   .threed-material {
+    margin-top: 64px;
+    font-size: 20px;
+  }
+  .video-lesson {
+    margin-top: 64px;
     font-size: 20px;
   }
 `;
@@ -156,7 +161,7 @@ export default function Home() {
           <div
             className="threed-material"
             onClick={() => {
-              navigate("/operation?fid=2");
+              navigate("/operation?fid=6");
             }}
           >
             <img
@@ -168,7 +173,7 @@ export default function Home() {
           <div
             className="video-lesson"
             onClick={() => {
-              navigate("/operation?fid=2");
+              navigate("/operation?fid=6");
             }}
           >
             <img
